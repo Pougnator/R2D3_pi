@@ -86,13 +86,16 @@ def main():
     with aiy.audio.get_recorder() as recorder:    
       while True:
           aiy.voicehat.get_status_ui().status('ready')
+          print('Ready to listen')
           miaHot.waitForHotword(recorder,voice_only,seconds)
           if not(voice_only) or seconds > 0:
               aiy.audio.play_wave(CONFIRM_SOUND_PATH)
           reply=""
+          print('Listening to what you actually have to say')
           aiy.voicehat.get_status_ui().status('listening')
           text = recognizer.recognize()
           aiy.voicehat.get_status_ui().status('thinking')
+          print('thinking')
           if not text:
               aiy.voicehat.get_status_ui().status('error')
               aiy.audio.play_wave(UNRECOGNISED_SOUND_PATH)
