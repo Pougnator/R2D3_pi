@@ -19,6 +19,13 @@ import aiy.voicehat
 import miaHotword
 import random
 import aiy.i18n
+import signal
+import time
+import serial
+import logging
+import platform
+import subprocess
+import sys
 
 CONFIRM_SOUND_PATH = '/home/pi/Music/R2D2/R2_Understood.wav'
 CONFUSED_SOUND_PATH = '/home/pi/Music/R2D2/R2_Confused.wav'
