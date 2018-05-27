@@ -28,6 +28,7 @@ def main():
     recognizer.expect_phrase('oui')
     recognizer.expect_phrase('non')
     recognizer.expect_phrase('salut')
+
     
     led = aiy.voicehat.get_led()
     voice_only=False
