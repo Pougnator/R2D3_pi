@@ -88,48 +88,24 @@ def main():
           miaHot.waitForHotword(recorder,voice_only,seconds)
           if not(voice_only) or seconds > 0:
               aiy.audio.play_wave(CONFIRM_SOUND_PATH)
-              aiy.audio.say(random.choice(['oui?','cuir?','ca va?','hamdoullah?','quoi?','yo']))
-              holidayList= ["sun","snow","surf"]
-              context=[]
-              seconds=0
           reply=""
           aiy.voicehat.get_status_ui().status('listening')
           text = recognizer.recognize()
           aiy.voicehat.get_status_ui().status('thinking')
           if not text:
               aiy.voicehat.get_status_ui().status('error')
-              reply='Sorry, I did not hear you.'
+              aiy.audio.play_wave(CONFUSED_SOUND_PATH)
           else:
               print('You said "', text, '"')
               if 'cuir' in text or 'cuire' in text:
                   feature=random.choice(holidayList)
-                  reply = "do you like {0}".format(feature)
+                  reply = "Cuir cuir cuir moustache"
                   context.extend([feature])
                   voice_only=True
-              elif 'goodbye' in text:
-                  reply = "ok, bye for now"
+              elif 'salut' in text:
+                  reply = "je viens de loin, mais vu mon teint je dois faire les choses bien. Ciao"
                   break
-              elif text=='yes':
-                  if "sun" in context:
-                    reply="how about cuba?"
-                  elif "snow" in context:
-                    reply="what about greenland?"
-                  elif "surf" in context:
-                    reply="california?"
-                  voice_only = False 
-              elif text=='no':
-                  print (len(holidayList))
-                  feature=context.pop()
-                  holidayList.remove(feature)
-                  if len(holidayList)==0:
-                      reply="you are a dead loss"
-                      voice_only = True
-                      seconds=3 # give a chance to say goodbye
-                  else:
-                      feature=random.choice(holidayList)
-                      context.extend([feature])
-                      reply = "do you like {0}".format(feature)
-                      voice_only = True
+              
           if len(reply) > 0:
             aiy.audio.say(reply)
     if len(reply) > 0:
