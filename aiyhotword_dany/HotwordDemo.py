@@ -20,6 +20,46 @@ import miaHotword
 import random
 import aiy.i18n
 
+CONFIRM_SOUND_PATH = '/home/pi/Music/R2D2/R2_Understood.wav'
+CONFUSED_SOUND_PATH = '/home/pi/Music/R2D2/R2_Confused.wav'
+UNRECOGNISED_SOUND_PATH = '/home/pi/Music/R2D2/R2_FastBip.wav'
+
+
+
+
+ser = serial.Serial(
+                      
+                       port='/dev/ttyAMA0',
+                       baudrate = 9600,
+                       parity=serial.PARITY_NONE,
+                       stopbits=serial.STOPBITS_ONE,
+                       bytesize=serial.EIGHTBITS,
+                       timeout=1
+                   )
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="[%(asctime)s] %(levelname)s:%(name)s:%(message)s"
+)
+def send_data_to_arduino(write_string):
+    print(write_string)
+    write_bytes = write_string.encode('ascii')
+    ser.write(write_bytes)
+
+def power_off_pi():
+    aiy.audio.say('Good bye!')
+    subprocess.call('sudo shutdown now', shell=True)
+
+
+def reboot_pi():
+    aiy.audio.say('See you in a bit!')
+    subprocess.call('sudo reboot', shell=True)
+
+
+def say_ip():
+    ip_address = subprocess.check_output("hostname -I | cut -d' ' -f1", shell=True)
+    aiy.audio.say('My IP address is %s' % ip_address.decode('utf-8'))
+
 def main():
     aiy.i18n.set_language_code("fr-FR")
     aiy.voicehat.get_status_ui().status('starting')
@@ -40,6 +80,7 @@ def main():
           aiy.voicehat.get_status_ui().status('ready')
           miaHot.waitForHotword(recorder,voice_only,seconds)
           if not(voice_only) or seconds > 0:
+              aiy.audio.play_wave(CONFIRM_SOUND_PATH)
               aiy.audio.say(random.choice(['oui?','cuir?','ca va?','hamdoullah?','quoi?','yo']))
               holidayList= ["sun","snow","surf"]
               context=[]
