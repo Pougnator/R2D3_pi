@@ -95,16 +95,40 @@ def main():
           aiy.voicehat.get_status_ui().status('thinking')
           if not text:
               aiy.voicehat.get_status_ui().status('error')
-              aiy.audio.play_wave(CONFUSED_SOUND_PATH)
+              aiy.audio.play_wave(UNRECOGNISED_SOUND_PATH)
           else:
               print('You said "', text, '"')
               if 'cuir' in text or 'cuire' in text:
                   reply = "Cuir cuir cuir moustache"
                   voice_only=True
-              elif 'salut' in text:
+              elif 'salut' or 'Salut' in text:
                   reply = "je viens de loin, mais vu mon teint je dois faire les choses bien. Ciao"
                   break
-              
+              elif 'eteindre' in text:
+                  power_off_pi()
+              elif text == 'redemarre':
+                  reboot_pi()
+                  break
+              elif text == 'ip address':
+                  say_ip()
+                  break
+              elif text == 'avance':
+                  send_data_to_arduino("Go Straight")
+                  break
+              elif text == 'tourne a droite':
+                  send_data_to_arduino("Turn Right")
+                  break
+              elif text == 'tourner a droite':
+                  send_data_to_arduino("Turn Right")
+                  break
+              elif text == 'tourne a gauche':
+                  send_data_to_arduino("Turn Left")
+              elif text == 'tourner a gauche':
+                  send_data_to_arduino("Turn Left")
+              elif text == 'recule':
+                  send_data_to_arduino("Go Backwards")
+              elif text == 'recul':
+                  send_data_to_arduino("Go Backwards")
           if len(reply) > 0:
             aiy.audio.say(reply)
     if len(reply) > 0:
