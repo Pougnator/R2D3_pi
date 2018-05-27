@@ -163,7 +163,7 @@ def main():
         print('Cannot run hotword demo on Pi Zero!')
         exit(-1)
     
-     with aiy.audio.get_recorder() as recorder:
+    with aiy.audio.get_recorder() as recorder:
         while True:
             status_ui.status('ready')
             miaHot.waitForHotword(recorder,voice_only,seconds)
