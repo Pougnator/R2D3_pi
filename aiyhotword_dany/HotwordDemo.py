@@ -72,6 +72,7 @@ def main():
     aiy.voicehat.get_status_ui().status('starting')
     recognizer = aiy.cloudspeech.get_recognizer()
     recognizer.expect_phrase('cuir')
+    recognizer.expect_phrase('cuire')
     recognizer.expect_phrase('oui')
     recognizer.expect_phrase('non')
     recognizer.expect_phrase('salut')
@@ -98,9 +99,7 @@ def main():
           else:
               print('You said "', text, '"')
               if 'cuir' in text or 'cuire' in text:
-                  feature=random.choice(holidayList)
                   reply = "Cuir cuir cuir moustache"
-                  context.extend([feature])
                   voice_only=True
               elif 'salut' in text:
                   reply = "je viens de loin, mais vu mon teint je dois faire les choses bien. Ciao"
