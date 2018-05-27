@@ -20,7 +20,7 @@ code doesn't need to record audio. Hot word detection "OK, Google" is supported.
 
 It is available for Raspberry Pi 2/3 only; Pi Zero is not supported.
 """
-import snowboydecoder
+
 import logging
 import platform
 import subprocess
@@ -50,13 +50,14 @@ def signal_handler(signal, frame):
 def interrupt_callback():
     global interrupted
     return interrupted
-
+'''
 if len(sys.argv) == 1:
     print("Error: need to specify model name")
     print("Usage: python demo.py your.model")
     sys.exit(-1)
 
 model = sys.argv[1]
+'''
 signal.signal(signal.SIGINT, signal_handler)
 
 voice_only=False
@@ -104,11 +105,13 @@ def process_event(assistant, event):
     status_ui = aiy.voicehat.get_status_ui()
     if event.type == EventType.ON_START_FINISHED:
         status_ui.status('ready')
-        if sys.stdout.isatty():
-            print('Say "OK, Google" then speak, or press Ctrl+C to quit...')
+        
+        #if sys.stdout.isatty():
+         #   print('Say "OK, Google" then speak, or press Ctrl+C to quit...')
+            
 
     elif event.type == EventType.ON_CONVERSATION_TURN_STARTED:
-        aiy.audio.play_wave(CONFIRM_SOUND_PATH)
+        #aiy.audio.play_wave(CONFIRM_SOUND_PATH)
         status_ui.status('listening')
 
     elif event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED and event.args:
@@ -153,6 +156,7 @@ def process_event(assistant, event):
           or event.type == EventType.ON_CONVERSATION_TURN_TIMEOUT
           or event.type == EventType.ON_NO_RESPONSE):
         status_ui.status('ready')
+       # miaHot.waitForHotword(recorder,voice_only,seconds)
 
     elif event.type == EventType.ON_ASSISTANT_ERROR and event.args and event.args['is_fatal']:
         sys.exit(1)
@@ -162,24 +166,21 @@ def main():
     if platform.machine() == 'armv6l':
         print('Cannot run hotword demo on Pi Zero!')
         exit(-1)
-    
+    status_ui = aiy.voicehat.get_status_ui()
+    credentials = aiy.assistant.auth_helpers.get_assistant_credentials()
+    with Assistant(credentials) as assistant:
+                
+        for event in assistant.start():
+            process_event(assistant, event)
     with aiy.audio.get_recorder() as recorder:
         while True:
             status_ui.status('ready')
             miaHot.waitForHotword(recorder,voice_only,seconds)
             status_ui.status('listening')
             print('Listening...')
-            credentials = aiy.assistant.auth_helpers.get_assistant_credentials()
-            with Assistant(credentials) as assistant:
-                for event in assistant.start():
+            assistant.start_conversation()
+            #assistant.send_text_query("Quelle heure est-il?")
             
-            if audio is not None:
-                aiy.audio.play_audio(audio)
-                
-            start_conversation()
-    
-   
-
-
+       
 if __name__ == '__main__':
     main()

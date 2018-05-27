@@ -18,14 +18,16 @@ import aiy.cloudspeech
 import aiy.voicehat
 import miaHotword
 import random
+import aiy.i18n
 
 def main():
+    aiy.i18n.set_language_code("fr-FR")
     aiy.voicehat.get_status_ui().status('starting')
     recognizer = aiy.cloudspeech.get_recognizer()
-    recognizer.expect_phrase('where should I go on holiday')
-    recognizer.expect_phrase('yes')
-    recognizer.expect_phrase('no')
-    recognizer.expect_phrase('goodbye')
+    recognizer.expect_phrase('cuir')
+    recognizer.expect_phrase('oui')
+    recognizer.expect_phrase('non')
+    recognizer.expect_phrase('salut')
     
     led = aiy.voicehat.get_led()
     voice_only=False
@@ -37,7 +39,7 @@ def main():
           aiy.voicehat.get_status_ui().status('ready')
           miaHot.waitForHotword(recorder,voice_only,seconds)
           if not(voice_only) or seconds > 0:
-              aiy.audio.say(random.choice(['yes honey?','ok?','yep?','yes?','what?','what darling?']))
+              aiy.audio.say(random.choice(['oui?','cuir?','ca va?','hamdoullah?','quoi?','yo']))
               holidayList= ["sun","snow","surf"]
               context=[]
               seconds=0
@@ -50,7 +52,7 @@ def main():
               reply='Sorry, I did not hear you.'
           else:
               print('You said "', text, '"')
-              if 'holiday' in text or 'holidays' in text:
+              if 'cuir' in text or 'cuire' in text:
                   feature=random.choice(holidayList)
                   reply = "do you like {0}".format(feature)
                   context.extend([feature])
