@@ -28,6 +28,7 @@ import sys
 import signal
 import time
 import serial
+import miaHotword
 
 import aiy.assistant.auth_helpers
 from aiy.assistant.library import Assistant
@@ -58,14 +59,10 @@ if len(sys.argv) == 1:
 model = sys.argv[1]
 signal.signal(signal.SIGINT, signal_handler)
 
-detector = snowboydecoder.HotwordDetector(model, sensitivity=0.5)
-print('Listening... Press Ctrl+C to exit')
+voice_only=False
+seconds=0
+miaHot=miaHotword.miaHotword()
 
-detector.start(detected_callback=snowboydecoder.ding_callback,
-               interrupt_check=interrupt_callback,
-               sleep_time=0.03)
-
-detector.terminate()
 
 
 ser = serial.Serial(
@@ -165,11 +162,23 @@ def main():
     if platform.machine() == 'armv6l':
         print('Cannot run hotword demo on Pi Zero!')
         exit(-1)
-
-    credentials = aiy.assistant.auth_helpers.get_assistant_credentials()
-    with Assistant(credentials) as assistant:
-        for event in assistant.start():
-            process_event(assistant, event)
+    
+     with aiy.audio.get_recorder() as recorder:
+        while True:
+            status_ui.status('ready')
+            miaHot.waitForHotword(recorder,voice_only,seconds)
+            status_ui.status('listening')
+            print('Listening...')
+            credentials = aiy.assistant.auth_helpers.get_assistant_credentials()
+            with Assistant(credentials) as assistant:
+                for event in assistant.start():
+            
+            if audio is not None:
+                aiy.audio.play_audio(audio)
+                
+            start_conversation()
+    
+   
 
 
 if __name__ == '__main__':
