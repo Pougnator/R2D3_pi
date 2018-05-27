@@ -18,11 +18,13 @@ import aiy.cloudspeech
 import aiy.voicehat
 import miaHotword
 import random
+import aiy.i18n
 
 def main():
+    aiy.i18n.set_language_code("fr-FR")
     aiy.voicehat.get_status_ui().status('starting')
     recognizer = aiy.cloudspeech.get_recognizer()
-    recognizer.expect_phrase('where should I go on holiday')
+    recognizer.expect_phrase('cuir')
     recognizer.expect_phrase('yes')
     recognizer.expect_phrase('no')
     recognizer.expect_phrase('goodbye')
