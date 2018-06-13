@@ -1,0 +1,2 @@
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET https://api-ratp.pierre-grimaud.fr/v3/schedules/metros/7/le+kremlin+bicetre/R
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET https://api-ratp.pierre-grimaud.fr/v3/schedules/metros/7/porte+d\'italie/R

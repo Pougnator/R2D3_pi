@@ -1,0 +1,9 @@
+$PROJ_DIR$\..\..\Profiles\OAD
+$PROJ_DIR$\..\Source
+$PROJ_DIR$\..\..\Profiles\Batt\CC254x
+$PROJ_DIR$\..\..\Profiles\HIDDev\CC254x
+$PROJ_DIR$\..\..\Profiles\SensorProfile\CC254x
+$PROJ_DIR$\..\..\..\..\Components\hal\target\CC2541ST
+$PROJ_DIR$\..\..\Profiles\Proximity
+$PROJ_DIR$\..\..\Profiles\Proximity\CC254x
+$PROJ_DIR$\..\..\Profiles\DevInfo

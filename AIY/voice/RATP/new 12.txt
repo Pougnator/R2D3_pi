@@ -1,0 +1,5 @@
+A modifier dans les specs en cas changement de mode de prod:
+
+- Pressure Sensor	5	002	FSR Sensor A101 from TEKSCAN page 5
+- Wipe antenna lamda/4 (25 mm length) with a total wire length from the white collar to the extreme end of the antenna = 26cm+-0.5cm.  page 6
+- 
