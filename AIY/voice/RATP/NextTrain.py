@@ -29,6 +29,8 @@ def getNextTrain(x_json, train_number):
 		i=i+1
 	if 'Train' in first_train:
 		first_train = 0
+	elif 'Service' in first_train:
+		first_train = 0
 	#print (first_train)
 	return(float(first_train))
 
