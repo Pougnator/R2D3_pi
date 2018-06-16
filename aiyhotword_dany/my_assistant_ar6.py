@@ -143,7 +143,7 @@ def process_event(assistant, event):
           or event.type == EventType.ON_NO_RESPONSE):
         status_ui.status('ready')
         listen_to_hotword=True 
-        print('fin de la conversation')
+        #print('fin de la conversation')
         sys.exit()
 
     elif event.type == EventType.ON_ASSISTANT_ERROR and event.args and event.args['is_fatal']:
