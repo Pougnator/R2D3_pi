@@ -146,9 +146,9 @@ def main():
         exit(-1)
         
     credentials = aiy.assistant.auth_helpers.get_assistant_credentials()
-    with Assistant(credentials) as assistant:
-      for event in assistant.start():
-        process_event(assistant, event)
+    assistant = Assistant(credentials)
+    for event in assistant.start():
+      process_event(assistant, event)
         
         
     with aiy.audio.get_recorder() as recorder:
