@@ -160,7 +160,7 @@ def main():
         print('Listening...')
     with Assistant(credentials) as assistant:
       for event in assistant.start():
-        status_ui.status('ready')
+        #status_ui.status('ready')
         #print(type(assisant.start())
         process_event(assistant, event)             
         
