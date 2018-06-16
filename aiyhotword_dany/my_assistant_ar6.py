@@ -158,10 +158,11 @@ def main():
         assistant.start_conversation()
         #status_ui.status('listening')
         print('Listening...')
-    for event in assistant.start():
-      status_ui.status('ready')
-      print(type(assisant.start())
-      process_event(assistant, event)             
+    with assistant:
+      for event in assistant.start():
+        status_ui.status('ready')
+        print(type(assisant.start())
+        process_event(assistant, event)             
         
         
     
