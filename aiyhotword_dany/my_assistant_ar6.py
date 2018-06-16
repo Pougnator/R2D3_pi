@@ -39,6 +39,8 @@ CONFIRM_SOUND_PATH = '/home/pi/Music/R2D2/R2_Understood.wav'
 CONFUSED_SOUND_PATH = '/home/pi/Music/R2D2/R2_Confused.wav'
 UNRECOGNISED_SOUND_PATH = '/home/pi/Music/R2D2/R2_FastBip.wav'
 
+voice_only=False
+seconds=0
 miaHot=miaHotword.miaHotword()
 
 
