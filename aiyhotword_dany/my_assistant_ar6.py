@@ -144,21 +144,24 @@ def main():
     if platform.machine() == 'armv6l':
         print('Cannot run hotword demo on Pi Zero!')
         exit(-1)
-    
+        
+    credentials = aiy.assistant.auth_helpers.get_assistant_credentials()
     with aiy.audio.get_recorder() as recorder:
       while listen_to_hotword:
           status_ui.status('ready')
           miaHot.waitForHotword(recorder,voice_only,seconds)
           status_ui.status('listening')
           print('Listening...')
+          
+          with Assistant(credentials) as assistant:
+            for event in assistant.start():
+              listen_to_hotword=False
+              process_event(assistant, event)
+              assistant.start_conversation()
+                  
         
         
-    credentials = aiy.assistant.auth_helpers.get_assistant_credentials()
-    with Assistant(credentials) as assistant:
-        for event in assistant.start():
-          process_event(assistant, event)
-          assistant.start_conversation()
-          listen_to_hotword=False
+    
         
               
             
