@@ -41,6 +41,7 @@ UNRECOGNISED_SOUND_PATH = '/home/pi/Music/R2D2/R2_FastBip.wav'
 
 voice_only=False
 seconds=0
+listen_for_hotword=True
 miaHot=miaHotword.miaHotword()
 
 
@@ -143,18 +144,22 @@ def main():
     if platform.machine() == 'armv6l':
         print('Cannot run hotword demo on Pi Zero!')
         exit(-1)
-
+    
+    with aiy.audio.get_recorder() as recorder:
+      while listen_to_hotword:
+          status_ui.status('ready')
+          miaHot.waitForHotword(recorder,voice_only,seconds)
+          status_ui.status('listening')
+          print('Listening...')
+        
+        
     credentials = aiy.assistant.auth_helpers.get_assistant_credentials()
     with Assistant(credentials) as assistant:
         for event in assistant.start():
-          with aiy.audio.get_recorder() as recorder:
-            while True:
-              #status_ui.status('ready')
-              miaHot.waitForHotword(recorder,voice_only,seconds)
-              process_event(assistant, event)
-              #status_ui.status('listening')
-              print('Listening...')
-              assistant.start_conversation()
+          process_event(assistant, event)
+          assistant.start_conversation()
+          listen_to_hotword=False
+        
               
             
 
