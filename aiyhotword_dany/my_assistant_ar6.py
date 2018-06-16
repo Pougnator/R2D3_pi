@@ -80,6 +80,7 @@ def say_ip():
 
 
 def process_event(assistant, event):
+    listen_to_hotword=True
     status_ui = aiy.voicehat.get_status_ui()
     if event.type == EventType.ON_START_FINISHED:
         status_ui.status('ready')
@@ -90,7 +91,7 @@ def process_event(assistant, event):
                 miaHot.waitForHotword(recorder,voice_only,seconds)
                 listen_to_hotword=False
                 assistant.start_conversation()
-                #status_ui.status('listening')
+                status_ui.status('listening')
                 print('Listening...')
 
             #assistant.send_text_query('Quelle heure est-il?')
@@ -147,7 +148,7 @@ def process_event(assistant, event):
 
 
 def main():
-    listen_to_hotword=True
+    
     if platform.machine() == 'armv6l':
         print('Cannot run hotword demo on Pi Zero!')
         exit(-1)
