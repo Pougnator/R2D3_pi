@@ -161,7 +161,7 @@ def main():
     with Assistant(credentials) as assistant:
       for event in assistant.start():
         status_ui.status('ready')
-        print(type(assisant.start())
+        #print(type(assisant.start())
         process_event(assistant, event)             
         
         
