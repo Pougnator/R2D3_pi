@@ -147,21 +147,24 @@ def main():
         
     credentials = aiy.assistant.auth_helpers.get_assistant_credentials()
     assistant = Assistant(credentials)
-    for event in assistant.start():
-      process_event(assistant, event)
+      
         
         
-    with aiy.audio.get_recorder() as recorder:
-      while listen_to_hotword:
-          #status_ui.status('ready')
+    
+     while listen_to_hotword:
+      with aiy.audio.get_recorder() as recorder:
+          
           miaHot.waitForHotword(recorder,voice_only,seconds)
-          assistant.start_conversation()
           listen_to_hotword=False
+          assistant.start_conversation()
           #status_ui.status('listening')
           print('Listening...')
           
          
-                  
+      for event in assistant.start():
+          status_ui.status('ready')
+          print(type(assisant.start())
+          process_event(assistant, event)             
         
         
     
