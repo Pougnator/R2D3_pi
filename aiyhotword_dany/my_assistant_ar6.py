@@ -144,12 +144,7 @@ def process_event(assistant, event):
         status_ui.status('ready')
         listen_to_hotword=True 
         print('fin de la conversation')
-        while listen_to_hotword:
-          miaHot.waitForHotword(recorder,voice_only,seconds)
-          listen_to_hotword=False
-          #assistant.start_conversation()
-          status_ui.status('listening')
-          print('Listening...')
+        sys.exit(1)
 
     elif event.type == EventType.ON_ASSISTANT_ERROR and event.args and event.args['is_fatal']:
         sys.exit(1)
