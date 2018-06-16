@@ -148,9 +148,9 @@ def main():
     credentials = aiy.assistant.auth_helpers.get_assistant_credentials()
     with aiy.audio.get_recorder() as recorder:
       while listen_to_hotword:
-          status_ui.status('ready')
+          #status_ui.status('ready')
           miaHot.waitForHotword(recorder,voice_only,seconds)
-          status_ui.status('listening')
+          #status_ui.status('listening')
           print('Listening...')
           
           with Assistant(credentials) as assistant:
