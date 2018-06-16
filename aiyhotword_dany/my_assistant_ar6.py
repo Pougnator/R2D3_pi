@@ -133,7 +133,7 @@ def process_event(assistant, event):
         elif text == 'recul':
             assistant.stop_conversation() 
             send_data_to_arduino("Go Backwards")
-            
+           
         aiy.audio.play_wave(UNRECOGNISED_SOUND_PATH)
     elif event.type == EventType.ON_END_OF_UTTERANCE:
         status_ui.status('thinking')
@@ -142,6 +142,8 @@ def process_event(assistant, event):
           or event.type == EventType.ON_CONVERSATION_TURN_TIMEOUT
           or event.type == EventType.ON_NO_RESPONSE):
         status_ui.status('ready')
+        listen_to_hotword=True 
+        print('fin de la conversation')
 
     elif event.type == EventType.ON_ASSISTANT_ERROR and event.args and event.args['is_fatal']:
         sys.exit(1)
