@@ -41,7 +41,6 @@ UNRECOGNISED_SOUND_PATH = '/home/pi/Music/R2D2/R2_FastBip.wav'
 
 voice_only=False
 seconds=0
-listen_to_hotword=True
 miaHot=miaHotword.miaHotword()
 
 
@@ -141,6 +140,7 @@ def process_event(assistant, event):
 
 
 def main():
+    listen_to_hotword=True
     if platform.machine() == 'armv6l':
         print('Cannot run hotword demo on Pi Zero!')
         exit(-1)
