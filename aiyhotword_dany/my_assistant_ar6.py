@@ -149,10 +149,10 @@ def main():
         for event in assistant.start():
           with aiy.audio.get_recorder() as recorder:
             while True:
-              status_ui.status('ready')
+              #status_ui.status('ready')
               miaHot.waitForHotword(recorder,voice_only,seconds)
               process_event(assistant, event)
-              status_ui.status('listening')
+              #status_ui.status('listening')
               print('Listening...')
               assistant.start_conversation()
               
