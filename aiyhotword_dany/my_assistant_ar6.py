@@ -83,14 +83,14 @@ def process_event(assistant, event):
         status_ui.status('ready')
         if sys.stdout.isatty():
             print('Assistant ready to start')
-     with aiy.audio.get_recorder() as recorder:
-      while True:
-        status_ui.status('ready')
-        miaHot.waitForHotword(recorder,voice_only,seconds)
-        status_ui.status('listening')
-        print('Listening...')
-        assistant.start_conversation()
-        #assistant.send_text_query("Quelle heure est-il?")
+        with aiy.audio.get_recorder() as recorder:
+          while True:
+            status_ui.status('ready')
+            miaHot.waitForHotword(recorder,voice_only,seconds)
+            status_ui.status('listening')
+            print('Listening...')
+            assistant.start_conversation()
+            #assistant.send_text_query("Quelle heure est-il?")
 
     elif event.type == EventType.ON_CONVERSATION_TURN_STARTED:
         aiy.audio.play_wave(CONFIRM_SOUND_PATH)
