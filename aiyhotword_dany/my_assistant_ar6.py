@@ -148,7 +148,7 @@ def process_event(assistant, event):
               with aiy.audio.get_recorder() as recorder:
                 miaHot.waitForHotword(recorder,voice_only,seconds)
                 listen_to_hotword=False
-                assistant.start_conversation()
+                #assistant.start_conversation()
                 status_ui.status('listening')
                 print('Listening...')
 
