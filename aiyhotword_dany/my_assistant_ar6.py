@@ -26,6 +26,7 @@ import sys
 import signal
 import time
 import serial
+import miaHotword
 
 import aiy.assistant.auth_helpers
 from aiy.assistant.library import Assistant
@@ -38,7 +39,7 @@ CONFIRM_SOUND_PATH = '/home/pi/Music/R2D2/R2_Understood.wav'
 CONFUSED_SOUND_PATH = '/home/pi/Music/R2D2/R2_Confused.wav'
 UNRECOGNISED_SOUND_PATH = '/home/pi/Music/R2D2/R2_FastBip.wav'
 
-
+miaHot=miaHotword.miaHotword()
 
 
 ser = serial.Serial(
@@ -144,6 +145,13 @@ def main():
         for event in assistant.start():
             process_event(assistant, event)
 
-
+    with aiy.audio.get_recorder() as recorder:
+      while True:
+        status_ui.status('ready')
+        miaHot.waitForHotword(recorder,voice_only,seconds)
+        status_ui.status('listening')
+        print('Listening...')
+        assistant.start_conversation()
+        #assistant.send_text_query("Quelle heure est-il?")
 if __name__ == '__main__':
     main()
