@@ -96,8 +96,6 @@ class MyAssistant(object):
             status_ui.status('ready')
             self._can_start_conversation = True
             # Start the voicehat button trigger.
-            message = "what day is it"
-            text_input = self.assistant.send_text_query(message)
             aiy.voicehat.get_button().on_press(self._on_button_pressed)
           
             #detector.start(detected_callback=self._on_hotword_detected,
@@ -147,7 +145,7 @@ class MyAssistant(object):
             
             self._assistant.start_conversation()
             print('Starting conversation')
-            message = "what day is it"
+            message = "quel jour sommes nous?"
             text_input = self._assistant.send_text_query(message)
            
            
