@@ -76,6 +76,9 @@ class MyAssistant(object):
             with aiy.audio.get_recorder() as recorder:
                 while True:
                     miaHot.waitForHotword(recorder,voice_only,seconds)
+                    if self._can_start_conversation:
+                        self._assistant.start_conversation()
+
             if sys.stdout.isatty():
                 print('Say "OK, Google" or press the button, then speak. '
                       'Press Ctrl+C to quit...')
