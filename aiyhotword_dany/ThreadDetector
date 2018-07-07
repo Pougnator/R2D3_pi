@@ -97,7 +97,7 @@ class MyAssistant(object):
             self._can_start_conversation = True
             # Start the voicehat button trigger.
             aiy.voicehat.get_button().on_press(self._on_button_pressed)
-            detector.start(detected_callback=on_press(self._on_button_pressed),
+            detector.start(detected_callback=self._on_button_pressed,
                            interrupt_check=interrupt_callback,
                            sleep_time=0.01)
             print('Hotword detection started')
