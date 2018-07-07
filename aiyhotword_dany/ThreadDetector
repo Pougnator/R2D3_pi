@@ -51,7 +51,7 @@ def interrupt_callback():
     return interrupted
 # capture SIGINT signal, e.g., Ctrl+C
 signal.signal(signal.SIGINT, signal_handler)
-detector = snowboydecoder.HotwordDetector(model, sensitivity=0.38)
+detector = snowboydecoder.HotwordDetector(model, sensitivity=0.5)
 print('Listening... Press Ctrl+C to exit')
 
 
@@ -158,9 +158,11 @@ def main():
     detector.start(detected_callback=detectedCallback,
                    interrupt_check=interrupt_callback,
                    sleep_time=0.01)
+    print('Hotword detection started')
 
    
     
     detector.terminate()
+    print('Hotword detection terminated')
 if __name__ == '__main__':
     main()
