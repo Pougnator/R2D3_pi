@@ -38,7 +38,7 @@ from google.assistant.library.event import EventType
 model = sys.argv[1]
 
 def detectedCallback():
-  print('recording audio...', end='', flush=True)
+  print('hotword detected...', end='', flush=True)
 
 def signal_handler(signal, frame):
     global interrupted
@@ -155,9 +155,8 @@ def main():
         
     MyAssistant().start()
     detector.start(detected_callback=detectedCallback,
-               audio_recorder_callback=audioRecorderCallback,
-               interrupt_check=interrupt_callback,
-               sleep_time=0.01)
+                   interrupt_check=interrupt_callback,
+                   sleep_time=0.01)
 
    
     
