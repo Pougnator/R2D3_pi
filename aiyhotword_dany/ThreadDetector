@@ -142,8 +142,11 @@ class MyAssistant(object):
         # 1. The assistant library is not yet ready; OR
         # 2. The assistant library is already in a conversation.
         if self._can_start_conversation:
+            detector.terminate()
+            print('Hotword detection terminated')
             self._assistant.start_conversation()
             print('Starting conversation')
+           
     def _on_hotword_detected(self):
         # Check if we can start a conversation. 'self._can_start_conversation'
         # is False when either:
@@ -163,7 +166,6 @@ def main():
 
    
     
-    #detector.terminate()
-    #print('Hotword detection terminated')
+   
 if __name__ == '__main__':
     main()
