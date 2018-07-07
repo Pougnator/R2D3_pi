@@ -25,7 +25,7 @@ import logging
 import platform
 import sys
 import threading
-
+import snowboydecoder
 #import miaHotword
 import signal
 import time
