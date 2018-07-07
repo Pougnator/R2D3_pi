@@ -163,7 +163,7 @@ def main():
 
    
     
-    detector.terminate()
-    print('Hotword detection terminated')
+    #detector.terminate()
+    #print('Hotword detection terminated')
 if __name__ == '__main__':
     main()
