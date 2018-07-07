@@ -25,7 +25,7 @@ import logging
 import platform
 import sys
 import threading
-import snowboythreaded
+
 #import miaHotword
 import signal
 import time
@@ -35,19 +35,22 @@ from aiy.assistant.library import Assistant
 import aiy.voicehat
 from google.assistant.library.event import EventType
 
+def detectedCallback():
+  print('recording audio...', end='', flush=True)
+
 def signal_handler(signal, frame):
-    global stop_program
-    stop_program = True
-    
+    global interrupted
+    interrupted = True
+
+
+def interrupt_callback():
+    global interrupted
+    return interrupted
 # capture SIGINT signal, e.g., Ctrl+C
 signal.signal(signal.SIGINT, signal_handler)
-
-# Initialize ThreadedDetector object and start the detection thread
-threaded_detector = snowboythreaded.ThreadedDetector(model, sensitivity=0.5)
-threaded_detector.start()
-
+detector = snowboydecoder.HotwordDetector(model, sensitivity=0.38)
 print('Listening... Press Ctrl+C to exit')
-    
+
 
 
 logging.basicConfig(
@@ -148,15 +151,15 @@ def main():
     if platform.machine() == 'armv6l':
         print('Cannot run hotword demo on Pi Zero!')
         exit(-1)
-    
-    
-    
-    # main loop
-    threaded_detector.start_recog(sleep_time=0.03)
-
-    # Let audio initialization happen before requesting input
-    time.sleep(1)
+        
     MyAssistant().start()
+    detector.start(detected_callback=detectedCallback,
+               audio_recorder_callback=audioRecorderCallback,
+               interrupt_check=interrupt_callback,
+               sleep_time=0.01)
 
+   
+    
+    detector.terminate()
 if __name__ == '__main__':
     main()
