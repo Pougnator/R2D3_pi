@@ -144,7 +144,9 @@ class MyAssistant(object):
             
             self._assistant.start_conversation()
             print('Starting conversation')
-            self._assistant.send_text_query('yo')
+            message = "what day is it"
+            text_input = self._assistant.send_text_query(message)
+           
            
     def _on_hotword_detected(self):
         # Check if we can start a conversation. 'self._can_start_conversation'
