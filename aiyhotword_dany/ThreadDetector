@@ -35,6 +35,8 @@ from aiy.assistant.library import Assistant
 import aiy.voicehat
 from google.assistant.library.event import EventType
 
+model = sys.argv[1]
+
 def detectedCallback():
   print('recording audio...', end='', flush=True)
 
