@@ -76,10 +76,10 @@ class MyAssistant(object):
             miaHot=miaHotword.miaHotword()
             seconds=0
             voice_only=False
-            with aiy.audio.get_recorder() as recorder:
-                while self._can_start_conversation:
-                    miaHot.waitForHotword(recorder,voice_only,seconds)
-                    self._on_hotword_detected()
+            #with aiy.audio.get_recorder() as recorder:
+                #while self._can_start_conversation:
+                    #miaHot.waitForHotword(recorder,voice_only,seconds)
+                    #self._on_hotword_detected()
 
             if sys.stdout.isatty():
                 print('Say "OK, Google" or press the button, then speak. '
