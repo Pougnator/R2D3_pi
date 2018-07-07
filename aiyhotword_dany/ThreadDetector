@@ -97,12 +97,11 @@ class MyAssistant(object):
             self._can_start_conversation = True
             # Start the voicehat button trigger.
             aiy.voicehat.get_button().on_press(self._on_button_pressed)
-            detector.start(detected_callback=self._on_hotword_detected,
-                           interrupt_check=interrupt_callback,
-                           sleep_time=0.01)
-            print('Hotword detection started')
-            seconds=0
-            voice_only=False
+            #detector.start(detected_callback=self._on_hotword_detected,
+            #               interrupt_check=interrupt_callback,
+            #               sleep_time=0.01)
+            #print('Hotword detection started')
+        
             #with aiy.audio.get_recorder() as recorder:
                 #while self._can_start_conversation:
                     #miaHot.waitForHotword(recorder,voice_only,seconds)
