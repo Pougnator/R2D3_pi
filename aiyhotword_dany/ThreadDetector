@@ -79,8 +79,7 @@ class MyAssistant(object):
             with aiy.audio.get_recorder() as recorder:
                 while True:
                     miaHot.waitForHotword(recorder,voice_only,seconds)
-                    if self._can_start_conversation:
-                        self._assistant.start_conversation()
+                    self._on_hotword_detected
 
             if sys.stdout.isatty():
                 print('Say "OK, Google" or press the button, then speak. '
@@ -109,7 +108,14 @@ class MyAssistant(object):
         # 2. The assistant library is already in a conversation.
         if self._can_start_conversation:
             self._assistant.start_conversation()
-
+   def _on_hotword_detected(self):
+        # Check if we can start a conversation. 'self._can_start_conversation'
+        # is False when either:
+        # 1. The assistant library is not yet ready; OR
+        # 2. The assistant library is already in a conversation.
+        if self._can_start_conversation:
+            self._assistant.start_conversation()
+            print('Starting conversation')
 
 def main():
     if platform.machine() == 'armv6l':
