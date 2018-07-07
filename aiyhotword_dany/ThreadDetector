@@ -77,7 +77,7 @@ class MyAssistant(object):
             seconds=0
             voice_only=False
             with aiy.audio.get_recorder() as recorder:
-                while True:
+                while self._can_start_conversation:
                     miaHot.waitForHotword(recorder,voice_only,seconds)
                     self._on_hotword_detected()
 
