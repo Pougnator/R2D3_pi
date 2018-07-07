@@ -25,6 +25,7 @@ import logging
 import platform
 import sys
 import threading
+import miaHotword
 
 import aiy.assistant.auth_helpers
 from aiy.assistant.library import Assistant
@@ -72,6 +73,9 @@ class MyAssistant(object):
             self._can_start_conversation = True
             # Start the voicehat button trigger.
             aiy.voicehat.get_button().on_press(self._on_button_pressed)
+            with aiy.audio.get_recorder() as recorder:
+                while True:
+                    miaHot.waitForHotword(recorder,voice_only,seconds)
             if sys.stdout.isatty():
                 print('Say "OK, Google" or press the button, then speak. '
                       'Press Ctrl+C to quit...')
