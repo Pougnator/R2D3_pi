@@ -35,6 +35,7 @@ from aiy.assistant.library import Assistant
 import aiy.voicehat
 from google.assistant.library.event import EventType
 
+interrupted = False
 model = sys.argv[1]
 
 def detectedCallback():
