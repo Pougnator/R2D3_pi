@@ -73,6 +73,7 @@ class MyAssistant(object):
             self._can_start_conversation = True
             # Start the voicehat button trigger.
             aiy.voicehat.get_button().on_press(self._on_button_pressed)
+            miaHot=miaHotword.miaHotword()
             with aiy.audio.get_recorder() as recorder:
                 while True:
                     miaHot.waitForHotword(recorder,voice_only,seconds)
@@ -112,7 +113,7 @@ def main():
     if platform.machine() == 'armv6l':
         print('Cannot run hotword demo on Pi Zero!')
         exit(-1)
-    miaHot=miaHotword.miaHotword()
+    
     seconds=0
     voice_only=False
     MyAssistant().start()
