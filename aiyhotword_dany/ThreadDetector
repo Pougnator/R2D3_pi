@@ -25,12 +25,30 @@ import logging
 import platform
 import sys
 import threading
-import miaHotword
+import snowboythreaded
+#import miaHotword
+import signal
+import time
 
 import aiy.assistant.auth_helpers
 from aiy.assistant.library import Assistant
 import aiy.voicehat
 from google.assistant.library.event import EventType
+
+def signal_handler(signal, frame):
+    global stop_program
+    stop_program = True
+    
+# capture SIGINT signal, e.g., Ctrl+C
+signal.signal(signal.SIGINT, signal_handler)
+
+# Initialize ThreadedDetector object and start the detection thread
+threaded_detector = snowboythreaded.ThreadedDetector(model, sensitivity=0.5)
+threaded_detector.start()
+
+print('Listening... Press Ctrl+C to exit')
+    
+
 
 logging.basicConfig(
     level=logging.INFO,
@@ -132,8 +150,13 @@ def main():
         exit(-1)
     
     
-    MyAssistant().start()
+    
+    # main loop
+    threaded_detector.start_recog(sleep_time=0.03)
 
+    # Let audio initialization happen before requesting input
+    time.sleep(1)
+    MyAssistant().start()
 
 if __name__ == '__main__':
     main()
