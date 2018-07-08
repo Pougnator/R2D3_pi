@@ -115,7 +115,8 @@ class MyAssistant(object):
 
         elif event.type == EventType.ON_CONVERSATION_TURN_STARTED:
             self._can_start_conversation = False
-            print('listening..')
+            sys.stdout.write('listening')
+            sys.stdout.flush()
             status_ui.status('listening')
             
         elif event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED and event.args:
@@ -145,9 +146,9 @@ class MyAssistant(object):
         if self._can_start_conversation:
             
             self._assistant.start_conversation()
-            print('Starting conversation')
-            message = "quel jour sommes nous?"
-            text_input = self._assistant.send_text_query(message)
+            print('Starting conversation on button pressed')
+            #message = "quel jour sommes nous?"
+            #text_input = self._assistant.send_text_query(message)
            
            
     def _on_hotword_detected(self):
@@ -159,7 +160,8 @@ class MyAssistant(object):
         #print('Hotword detection terminated')
         if self._can_start_conversation:
             self._assistant.start_conversation()
-            print('Starting conversation')
+            sys.stdout.write('Starting conversation on hotword detected')
+            sys.stdout.flush()
 
 def main():
     if platform.machine() == 'armv6l':
