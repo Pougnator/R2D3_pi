@@ -142,7 +142,7 @@ class MyAssistant(object):
                 or event.type == EventType.ON_CONVERSATION_TURN_TIMEOUT
                 or event.type == EventType.ON_NO_RESPONSE):
               #status_ui.status('ready')
-              self._stop_conversation()
+              #self.assistant._stop_conversation()
               
               #self.set_mic_mute(True)
               
