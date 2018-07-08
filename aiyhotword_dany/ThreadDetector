@@ -101,7 +101,8 @@ class MyAssistant(object):
             detector.start(detected_callback=self._on_hotword_detected,
                            interrupt_check=interrupt_callback,
                            sleep_time=0.01)
-            print('Hotword detection started')
+            sys.stdout.write('hotword detection started')
+            sys.stdout.flush()
         
             #with aiy.audio.get_recorder() as recorder:
                 #while self._can_start_conversation:
@@ -154,8 +155,8 @@ class MyAssistant(object):
         # is False when either:
         # 1. The assistant library is not yet ready; OR
         # 2. The assistant library is already in a conversation.
-        detector.terminate()
-        print('Hotword detection terminated')
+        #detector.terminate()
+        #print('Hotword detection terminated')
         if self._can_start_conversation:
             self._assistant.start_conversation()
             print('Starting conversation')
