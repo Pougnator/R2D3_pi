@@ -95,11 +95,12 @@ class MyAssistant(object):
         credentials = aiy.assistant.auth_helpers.get_assistant_credentials()
         with Assistant(credentials) as assistant:
             self._assistant = assistant
-            for event in assistant.start():
-                self._process_event(event)
+            with verrou:
+              for event in assistant.start():
+                  self._process_event(event)
 
     def _process_event(self, event):
-        with verrou: 
+        
           status_ui = aiy.voicehat.get_status_ui()
           if event.type == EventType.ON_START_FINISHED:
               status_ui.status('ready')
@@ -120,8 +121,7 @@ class MyAssistant(object):
 
           elif event.type == EventType.ON_CONVERSATION_TURN_STARTED:
               self._can_start_conversation = False
-              sys.stdout.write('listening')
-              sys.stdout.flush()
+              print('listening')
               status_ui.status('listening')
 
           elif event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED and event.args:
@@ -176,8 +176,8 @@ def main():
     detector.start(detected_callback=detectedCallback,
                            interrupt_check=interrupt_callback,
                            sleep_time=0.01)
-    sys.stdout.write('hotword detection started')
-    sys.stdout.flush()
+    print('hotword detection started')
+   
         
     
  
