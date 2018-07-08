@@ -152,7 +152,7 @@ class MyAssistant(object):
               detector.start(detected_callback=detectedCallback,
                            interrupt_check=interrupt_callback,
                            sleep_time=0.01)
-              sys.exit()
+              #sys.exit()
 
           elif event.type == EventType.ON_ASSISTANT_ERROR and event.args and event.args['is_fatal']:
               sys.exit(1)
