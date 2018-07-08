@@ -40,7 +40,8 @@ interrupted = False
 model = sys.argv[1]
 
 verrou = Lock()
-global assistant_not_running_already = True
+global assistant_not_running_already 
+assistant_not_running_already = True
 
 def detectedCallback():
   #global assistant_not_running_already
