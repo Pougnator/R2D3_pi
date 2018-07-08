@@ -169,7 +169,7 @@ def main():
         print('Cannot run hotword demo on Pi Zero!')
         exit(-1)
         
-    detector.start(detected_callback=self._on_hotword_detected,
+    detector.start(detected_callback=detectedCallback,
                            interrupt_check=interrupt_callback,
                            sleep_time=0.01)
     sys.stdout.write('hotword detection started')
