@@ -38,8 +38,13 @@ from google.assistant.library.event import EventType
 interrupted = False
 model = sys.argv[1]
 
+assistant_not_running_already = True
+
 def detectedCallback():
-  print('hotword detected...', end='', flush=True)
+  if assistant_not_running_already:
+    print('hotword detected...', end='', flush=True)
+    MyAssistant().start()
+    assistant_not_running_already = False
 
 def signal_handler(signal, frame):
     global interrupted
@@ -53,7 +58,7 @@ def interrupt_callback():
 signal.signal(signal.SIGINT, signal_handler)
 detector = snowboydecoder.HotwordDetector(model, sensitivity=0.5)
 print('Listening... Press Ctrl+C to exit')
-
+    
 
 
 logging.basicConfig(
@@ -98,11 +103,7 @@ class MyAssistant(object):
             # Start the voicehat button trigger.
             aiy.voicehat.get_button().on_press(self._on_button_pressed)
           
-            detector.start(detected_callback=self._on_hotword_detected,
-                           interrupt_check=interrupt_callback,
-                           sleep_time=0.01)
-            sys.stdout.write('hotword detection started')
-            sys.stdout.flush()
+           
         
             #with aiy.audio.get_recorder() as recorder:
                 #while self._can_start_conversation:
@@ -168,7 +169,13 @@ def main():
         print('Cannot run hotword demo on Pi Zero!')
         exit(-1)
         
-    MyAssistant().start()
+    detector.start(detected_callback=self._on_hotword_detected,
+                           interrupt_check=interrupt_callback,
+                           sleep_time=0.01)
+    sys.stdout.write('hotword detection started')
+    sys.stdout.flush()
+        
+    
  
 
    
