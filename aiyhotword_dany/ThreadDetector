@@ -45,6 +45,8 @@ assistant_not_running_already = True
 
 def detectedCallback():
   global assistant_not_running_already
+  global interrupted
+  interrupted = True
   if assistant_not_running_already == True:
     assistant_not_running_already = False
     print('yeah hotword detected...', end='', flush=True)
@@ -58,7 +60,6 @@ def signal_handler(signal, frame):
 
 def interrupt_callback():
     global interrupted
-    interrupted = True
     return interrupted
 # capture SIGINT signal, e.g., Ctrl+C
 signal.signal(signal.SIGINT, signal_handler)
