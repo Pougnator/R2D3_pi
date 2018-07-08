@@ -40,14 +40,14 @@ interrupted = False
 model = sys.argv[1]
 
 verrou = RLock()
-global assistant_not_running_already 
+
 assistant_not_running_already = True
 
 def detectedCallback():
-  #global assistant_not_running_already
-  if assistant_not_running_already:
+  global assistant_not_running_already
+  if assistant_not_running_already == True:
     assistant_not_running_already = False
-    print('hotword detected...', end='', flush=True)
+    print('yeah hotword detected...', end='', flush=True)
     MyAssistant().start()
     
 
