@@ -39,7 +39,7 @@ from google.assistant.library.event import EventType
 interrupted = False
 model = sys.argv[1]
 
-verrou = Lock()
+verrou = RLock()
 global assistant_not_running_already 
 assistant_not_running_already = True
 
