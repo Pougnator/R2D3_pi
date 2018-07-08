@@ -26,6 +26,7 @@ import platform
 import sys
 import threading
 import snowboydecoder
+from threading import Thread, RLock
 #import miaHotword
 import signal
 import time
