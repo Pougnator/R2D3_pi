@@ -141,9 +141,18 @@ class MyAssistant(object):
           elif (event.type == EventType.ON_CONVERSATION_TURN_FINISHED
                 or event.type == EventType.ON_CONVERSATION_TURN_TIMEOUT
                 or event.type == EventType.ON_NO_RESPONSE):
-              status_ui.status('ready')
+              #status_ui.status('ready')
+              self._stop_conversation()
+              
+              #self.set_mic_mute(True)
+              
               self._can_start_conversation = True
+              
               print('End of conversation')
+              detector.start(detected_callback=detectedCallback,
+                           interrupt_check=interrupt_callback,
+                           sleep_time=0.01)
+              sys.exit()
 
           elif event.type == EventType.ON_ASSISTANT_ERROR and event.args and event.args['is_fatal']:
               sys.exit(1)
