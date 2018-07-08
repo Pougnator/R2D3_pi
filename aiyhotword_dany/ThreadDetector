@@ -53,6 +53,7 @@ def detectedCallback():
     detector.terminate()
     MyAssistant().start()
     
+    
 
 def signal_handler(signal, frame):
     global interrupted
@@ -144,7 +145,7 @@ class MyAssistant(object):
               #status_ui.status('ready')
               #self.assistant._stop_conversation()
               
-              #self.set_mic_mute(True)
+              self.set_mic_mute(True)
               
               self._can_start_conversation = True
               
