@@ -50,6 +50,7 @@ def detectedCallback():
   if assistant_not_running_already == True:
     assistant_not_running_already = False
     print('yeah hotword detected...', end='', flush=True)
+    detector.terminate()
     MyAssistant().start()
     
 
