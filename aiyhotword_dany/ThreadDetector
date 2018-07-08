@@ -45,9 +45,10 @@ assistant_not_running_already = True
 def detectedCallback():
   global assistant_not_running_already
   if assistant_not_running_already:
+    assistant_not_running_already = False
     print('hotword detected...', end='', flush=True)
     MyAssistant().start()
-    assistant_not_running_already = False
+    
 
 def signal_handler(signal, frame):
     global interrupted
