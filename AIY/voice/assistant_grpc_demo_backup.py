@@ -30,6 +30,7 @@ logging.basicConfig(
 def main():
     status_ui = aiy.voicehat.get_status_ui()
     status_ui.status('starting')
+    aiy.i18n.set_language_code('fr-FR')
     assistant = aiy.assistant.grpc.get_assistant()
     button = aiy.voicehat.get_button()
     with aiy.audio.get_recorder():
