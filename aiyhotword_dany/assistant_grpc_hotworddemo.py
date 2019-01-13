@@ -31,6 +31,9 @@ def main():
     seconds=0
     status_ui = aiy.voicehat.get_status_ui()
     status_ui.status('starting')
+    aiy.i18n.set_language_code('fr-FR')
+    aiy.audio.set_tts_volume(50)
+    aiy.audio.set_tts_pitch(100)
     assistant = aiy.assistant.grpc.get_assistant()
     miaHot=miaHotword.miaHotword()
     with aiy.audio.get_recorder() as recorder:
