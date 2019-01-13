@@ -22,7 +22,7 @@ import aiy.audio
 import aiy.voicehat
 
 logging.basicConfig(
-    level=logging.DEBUG,
+    level=logging.VERBOSE,
     format="[%(asctime)s] %(levelname)s:%(name)s:%(message)s"
 )
 
