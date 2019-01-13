@@ -22,7 +22,7 @@ import aiy.audio
 import aiy.voicehat
 
 logging.basicConfig(
-    level=logging.VERBOSE,
+    level=logging.DEBUG,
     format="[%(asctime)s] %(levelname)s:%(name)s:%(message)s"
 )
 
@@ -33,7 +33,7 @@ def main():
     status_ui.status('starting')
     aiy.i18n.set_language_code('fr-FR')
     aiy.audio.set_tts_volume(20)
-    aiy.audio.set_tts_pitch(20)
+    aiy.audio.set_tts_pitch(100)
     assistant = aiy.assistant.grpc.get_assistant()
     miaHot=miaHotword.miaHotword()
     with aiy.audio.get_recorder() as recorder:
@@ -42,6 +42,7 @@ def main():
             miaHot.waitForHotword(recorder,voice_only,seconds)
             status_ui.status('listening')
             print('Listening...')
+            assistant.send_text_query("Quelle heure il est?")
             text, audio = assistant.recognize()
             if text is not None:
                 if text == 'au revoir':
