@@ -42,7 +42,7 @@ def main():
             miaHot.waitForHotword(recorder,voice_only,seconds)
             status_ui.status('listening')
             print('Listening...')
-            assistant.send_text_query("Quelle heure il est?")
+            #assistant.send_text_query("Quelle heure il est?")
             text, audio = assistant.recognize()
             if text is not None:
                 if text == 'au revoir':
