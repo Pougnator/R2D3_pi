@@ -6,7 +6,10 @@ But after only a few months, the protype escaped and was fortunately retrieved b
 
 
 
-
-*Wifi connection parameters:
+##Connection parameters
+**Wifi connection parameters:**
 Cuir
+cuircuir
+**PI parameters**
+pi
 cuircuir
